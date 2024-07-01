@@ -1,13 +1,12 @@
 package com.iteratrlearning.shu_book.chapter_04;
 
-import static java.util.stream.Collectors.*;
-
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Predicate;
+import static java.util.stream.Collectors.toMap;
 
 /**
- * 2차
+ * 1차
  * Document 검색을 위한 사전 처리 책임 클래스 
  */
 class Query implements Predicate<Document>{
