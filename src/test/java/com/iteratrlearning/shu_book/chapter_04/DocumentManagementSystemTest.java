@@ -1,12 +1,11 @@
 package com.iteratrlearning.shu_book.chapter_04;
 
-import static java.util.stream.Collectors.*;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import static java.util.stream.Collectors.toMap;
 
 import org.junit.Test;
 

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import static java.util.Collections.unmodifiableList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 public class DocumentManagementSystem {
 
     private final List<Document> documents = new ArrayList<>();
+    private final List<Document> documentsView = unmodifiableList(documents);
     private final Map<String, Importer> extensionToImporter = new HashMap<>();
 
     public DocumentManagementSystem() {
@@ -22,7 +24,7 @@ public class DocumentManagementSystem {
     
     // 2차. LSP 선행 조건
     //      Import 하기 전 검증 수행
-    void importFile(String path) throws IOException {
+    void importFile(String path) throws IOException, UnknownFileTypeException {
         final File file = new File(path);
         if(!file.exists()) throw new FileNotFoundException(path);
 
@@ -44,8 +46,7 @@ public class DocumentManagementSystem {
     }
 
     List<Document> contents() {
-
-        return null;
+        return documentsView;
     }
 
     // 1차. 문서 관리 시스템에 등록된 문서 검색
