@@ -1,14 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package com.iteratrlearning.shu_book.chapter_04;
 
 import java.util.Map;
 
 /**
- * 도메인 클래스
+ * 문서관리시스템에서 관리대상이 되는 도메인 클래스
  */
 class Document {
 
@@ -21,5 +16,4 @@ class Document {
     public String getAttribute(final String attributeName) {
         return attributes.get(attributeName);
     }
-
 }

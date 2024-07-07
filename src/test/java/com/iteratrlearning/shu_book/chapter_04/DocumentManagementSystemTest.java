@@ -1,11 +1,16 @@
 package com.iteratrlearning.shu_book.chapter_04;
 
+import static com.iteratrlearning.shu_book.chapter_04.Attributes.*;
+import static java.util.stream.Collectors.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import static java.util.stream.Collectors.toMap;
 
 import org.junit.Test;
 
@@ -18,6 +23,50 @@ public class DocumentManagementSystemTest {
     private static final String XRAY = RESOURCES + "xray.jpg";
     private static final String INVOICE = RESOURCES + "patient.invoice";
     private static final String JOE_BLOGGS = "Joe Bloggs";
+
+    private DocumentManagementSystem system = new DocumentManagementSystem();
+
+    @Test
+    public void shouldImportFile() throws IOException {
+        system.importFile(LETTER);
+        final Document document = onlyDocument();
+        assertAttributeEquals(document, Attributes.PATH, LETTER);
+        
+    }
+
+    private void assertAttributeEquals(final Document document,
+                                        final String attributeName,
+                                        final String expectedValue) {
+        assertEquals("Document has the wrong value for " + attributeName, 
+        expectedValue,
+        document.getAttribute(attributeName));
+    }
+
+    @Test
+    public void shouldImportLetterAttributes() throws IOException {
+        system.importFile(LETTER);
+        final Document document = onlyDocument();
+        assertAttributeEquals(document, PATIENT, JOE_BLOGGS);
+        assertAttributeEquals(document, ADDRESS, "123 Fake Street\n" +
+                "Westminster\n" +
+                "London\n" +
+                "United Kingdom");
+        assertAttributeEquals(document, BODY,
+                "We are writing to you to confirm the re-scheduling of your appointment\n" +
+                "with Dr. Avaj from 29th December 2016 to 5th January 2017.");
+            assertTypeIs("LETTER", document);
+    }
+
+    private void assertTypeIs(final String type, final Document document) {
+        assertAttributeEquals(document, TYPE, type);
+    }
+
+    private Document onlyDocument() {
+        final List<Document> documents = system.contents();
+        assertThat(documents, hasSize(1));
+        return documents.get(0);
+    }
+
 
 
     // 검색 조건 문자열 : "patient:Joe, body:Diet Coke"

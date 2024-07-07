@@ -1,12 +1,10 @@
 package com.iteratrlearning.shu_book.chapter_04;
 
+import static com.iteratrlearning.shu_book.chapter_04.Attributes.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-
-import static com.iteratrlearning.shu_book.chapter_04.Attributes.BODY;
-import static com.iteratrlearning.shu_book.chapter_04.Attributes.PATIENT;
-import static com.iteratrlearning.shu_book.chapter_04.Attributes.TYPE;
 
 public class ReportImporter implements Importer {
 
